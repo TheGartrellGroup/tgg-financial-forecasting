@@ -30,7 +30,7 @@ query = """
 }
 """
 
-data = {"query": query}
+data = {"query": query.format(boardId)}
 
 response = requests.post(url=apiUrl, json=data, headers=headers)
 print(response.json())
