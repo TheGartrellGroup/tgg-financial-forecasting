@@ -2,6 +2,9 @@ import requests
 import json
 import os
 import os.path
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 apiKey = os.environ.get("API_KEY")
 boardId = os.environ.get("DEALS_BOARD")
