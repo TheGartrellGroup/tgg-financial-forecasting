@@ -8,29 +8,29 @@ boardId = os.environ.get("DEALS_BOARD")
 apiUrl = "https://api.monday.com/v2"
 headers = {"Authorization": apiKey, "API-Version": "2023-04"}
 
-query = """
-{
-  boards(ids: {boardId}) {
-    items_page {
-      items {
+query = f"""
+{{
+  boards(ids: {boardId}) {{
+    items_page {{
+      items {{
         id
         name
-        column_values(ids: ["numbers", "numbers0", "numbers6", "text", "date", "date9"]) {
+        column_values(ids: ["numbers", "numbers0", "numbers6", "text", "date", "date9"]) {{
           value
           text
-          column {
+          column {{
             id
             title
             description
-          }
-        }
-      }
-    }
-  }
-}
+          }}
+        }}
+      }}
+    }}
+  }}
+}}
 """
 
-data = {"query": query.format(boardId)}
+data = {"query": query}
 
 response = requests.post(url=apiUrl, json=data, headers=headers)
 print(response.json())
