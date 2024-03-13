@@ -14,14 +14,11 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
-# The ID and range of a sample spreadsheet.
-SAMPLE_SPREADSHEET_ID = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms"
-SAMPLE_RANGE_NAME = "Class Data!A2:E"
-
 load_dotenv(find_dotenv())
 
 apiKey = os.environ.get("API_KEY")
 boardId = os.environ.get("DEALS_BOARD")
+spreadsheetId = os.environ.get("SPREADSHEET_ID")
 apiUrl = "https://api.monday.com/v2"
 headers = {"Authorization": apiKey, "API-Version": "2023-10"}
 
@@ -133,7 +130,7 @@ def get_creds():
 
         # Call the Sheets API
         sheet = service.spreadsheets()
-        result = sheet.values().get(spreadsheetId="", range="").execute()
+        result = sheet.values().get(spreadsheetId=spreadsheetId, range="").execute()
         values = result.get("values", [])
 
         if not values:
@@ -146,3 +143,7 @@ def get_creds():
             print(f"{row[0]}, {row[4]}")
     except HttpError as err:
         print(err)
+
+
+if __name__ == "__main__":
+    get_creds()
