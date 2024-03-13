@@ -12,7 +12,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 load_dotenv(find_dotenv())
 
@@ -105,9 +105,6 @@ def update_values(spreadsheet_id, range_name, value_input_option, _values):
 
 
 def get_creds():
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
-    """
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -145,5 +142,5 @@ def get_creds():
         print(err)
 
 
-if __name__ == "__main__":
-    get_creds()
+# if __name__ == "__main__":
+#     get_creds()
