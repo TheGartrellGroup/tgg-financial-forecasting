@@ -1,0 +1,16 @@
+{
+  "required_fields": [
+    "Exp Duration (m)",
+    "Est Deal Value",
+    "Close Probability",
+    "Exp Proj Start"
+  ],
+  "default_fields": [
+    {
+      "Payment Terms": "30"
+    },
+    {
+      "Percent TGG": "100"
+    }
+  ]
+}

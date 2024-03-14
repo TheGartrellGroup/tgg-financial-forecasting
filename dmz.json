@@ -1,0 +1,114 @@
+[
+  {
+    "March": {
+      "1-15": [
+        {
+          "project_name": "Foundry Commercial Interactive Map Solution",
+          "project_id": "5915110480",
+          "project_state": "active",
+          "Stage": "Proposal",
+          "Est Deal Value": "20000",
+          "Close Probability": "50",
+          "Exp Proj Start": "2024-03-05",
+          "Close Date": "",
+          "Payment Terms": "30",
+          "Percent TGG": "100",
+          "Exp Duration (m)": "2"
+        },
+        {
+          "project_name": "Portland BOT",
+          "project_id": "4382252195",
+          "project_state": "active",
+          "Stage": "RFP Submitted",
+          "Est Deal Value": "35000",
+          "Close Probability": "45",
+          "Exp Proj Start": "2024-03-14",
+          "Close Date": "",
+          "Payment Terms": "30",
+          "Percent TGG": "50",
+          "Exp Duration (m)": "1"
+        }
+      ],
+      "16-31": [
+        {
+          "project_name": "Foundry Commercial Interactive Map Solution",
+          "project_id": "5915110480",
+          "project_state": "active",
+          "Stage": "Proposal",
+          "Est Deal Value": "20000",
+          "Close Probability": "50",
+          "Exp Proj Start": "2024-03-25",
+          "Close Date": "",
+          "Payment Terms": "30",
+          "Percent TGG": "100",
+          "Exp Duration (m)": "2"
+        },
+        {
+          "project_name": "Portland BOT",
+          "project_id": "4382252195",
+          "project_state": "active",
+          "Stage": "RFP Submitted",
+          "Est Deal Value": "35000",
+          "Close Probability": "45",
+          "Exp Proj Start": "2024-03-16",
+          "Close Date": "",
+          "Payment Terms": "30",
+          "Percent TGG": "50",
+          "Exp Duration (m)": "1"
+        }
+      ]
+    }
+  },
+  {
+    "project_name": "NWN Utility Network Migration Project",
+    "project_id": "4685134435",
+    "project_state": "active",
+    "Stage": "Scope/Discovery",
+    "Est Deal Value": "2500000",
+    "Close Probability": "30",
+    "Exp Proj Start": "2024-09-28",
+    "Close Date": "",
+    "Payment Terms": "30",
+    "Percent TGG": "20",
+    "Exp Duration (m)": "8"
+  },
+  {
+    "project_name": "Multnomah County Enterprise Migration",
+    "project_id": "4382296905",
+    "project_state": "active",
+    "Stage": "Lead",
+    "Est Deal Value": "75000",
+    "Close Probability": "60",
+    "Exp Proj Start": "2024-06-18",
+    "Close Date": "",
+    "Payment Terms": "30",
+    "Percent TGG": "100",
+    "Exp Duration (m)": "6"
+  },
+  {
+    "project_name": "Portland BOT",
+    "project_id": "4382252195",
+    "project_state": "active",
+    "Stage": "RFP Submitted",
+    "Est Deal Value": "35000",
+    "Close Probability": "45",
+    "Exp Proj Start": "2024-03-05",
+    "Close Date": "",
+    "Payment Terms": "30",
+    "Percent TGG": "50",
+    "Exp Duration (m)": "1"
+  },
+  {
+    "project_name": "Forest Grove GIS Maturity Assessment + Roadmap",
+    "project_id": "5610545110",
+    "project_state": "active",
+    "Stage": "Won",
+    "Est Deal Value": "17107",
+    "Close Probability": "100",
+    "Exp Proj Start": "2023-12-29",
+    "Close Date": "",
+    "Payment Terms": "30",
+    "Percent TGG": "100",
+    "Exp Duration (m)": "2"
+  }
+]

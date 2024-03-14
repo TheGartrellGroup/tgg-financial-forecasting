@@ -10,6 +10,9 @@ from googleapiclient.errors import HttpError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
+from calendar import monthrange
+from datetime import datetime
+import math
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -21,6 +24,16 @@ boardId = os.environ.get("DEALS_BOARD")
 spreadsheetId = os.environ.get("SPREADSHEET_ID")
 apiUrl = "https://api.monday.com/v2"
 headers = {"Authorization": apiKey, "API-Version": "2023-10"}
+project_config = None
+
+# READ IN CONFIG.JSON
+try:
+    with open("config.json", "r") as infile:
+        project_config = json.load(infile)
+except Exception as e:
+    print("Unable to load config.json")
+    print(str(e))
+    exit()
 
 query = f"""
 {{
@@ -34,7 +47,7 @@ query = f"""
       name
       state
       column_values(
-        ids: ["status", "numbers", "numbers0", "numbers6", "text", "date", "date9"]
+        ids: ["status", "numbers", "numbers0", "numbers1", "numbers6", "text", "date", "date9"]
       ) {{
         value
         text
@@ -72,7 +85,51 @@ for monday_project in results["data"]["items_page_by_column_values"]["items"]:
 
 print("Done formatting Monday.com results....")
 
-print(results)
+
+# Filter out for empty required fields
+required_fields = project_config["required_fields"]
+default_fields = project_config["default_fields"]
+empty_fields = []
+
+for project in project_list:
+    for field in required_fields:
+        if project[field] == "":
+            print(f"Removing {project['project_name']} because {field} is empty :( ")
+            empty_fields.append(project["project_name"])
+
+empty_set = set(empty_fields)
+filtered_list = [x for x in project_list if x["project_name"] not in empty_set]
+
+# Set defaults based on config
+for project in filtered_list:
+    for field in default_fields:
+        # This is gross and should be made better
+        if project[list(field.keys())[0:][0]] == "":
+            project[list(field.keys())[0:][0]] = str(list(field.values())[0])
+
+print(filtered_list)
+
+formatted_data = []
+for project in filtered_list:
+    year, month, day = project["Exp Proj Start"].split("-")
+
+    date_object = datetime.strptime(project["Exp Proj Start"], "%Y-%m-%d")
+    month_name = date_object.strftime("%B")
+    days_in_month = monthrange(int(year), int(month))
+    month_half = math.ceil(days_in_month[1] / 2)
+
+
+def generate_template():
+    spreadsheet_template = {}
+    current_date = datetime.now()
+    this_year = current_date.year
+    spreadsheet_template[str(this_year)] = {}
+
+    for num in range(1, 6):
+        spreadsheet_template[str(this_year + num)] = {}
+        spreadsheet_template[str(this_year - num)] = {}
+
+    print(spreadsheet_template)
 
 
 def update_values(spreadsheet_id, range_name, value_input_option, _values):
@@ -142,5 +199,5 @@ def get_creds():
         print(err)
 
 
-# if __name__ == "__main__":
-#     get_creds()
+if __name__ == "__main__":
+    generate_template()
