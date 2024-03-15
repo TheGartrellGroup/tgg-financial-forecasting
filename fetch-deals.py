@@ -10,7 +10,7 @@ from googleapiclient.errors import HttpError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from calendar import monthrange
+import calendar
 from datetime import datetime
 import math
 
@@ -115,21 +115,32 @@ for project in filtered_list:
 
     date_object = datetime.strptime(project["Exp Proj Start"], "%Y-%m-%d")
     month_name = date_object.strftime("%B")
-    days_in_month = monthrange(int(year), int(month))
+    days_in_month = calendar.monthrange(int(year), int(month))
     month_half = math.ceil(days_in_month[1] / 2)
 
 
-def generate_template():
-    spreadsheet_template = {}
-    current_date = datetime.now()
-    this_year = current_date.year
-    spreadsheet_template[str(this_year)] = {}
+def create_calendar_template():
+    output_dict = {}
+    current_date = datetime.datetime.now()
 
-    for num in range(1, 6):
-        spreadsheet_template[str(this_year + num)] = {}
-        spreadsheet_template[str(this_year - num)] = {}
+    # Datetime objs for 5 years previous/future from current year
+    floor_year = current_date.year - 5
+    ceiling_year = current_date.year + 5
 
-    print(spreadsheet_template)
+    # Stub out years
+    for year in range(int(floor_year), int(ceiling_year + 1)):
+
+        # ...and months
+        output_dict[str(year)] = {}
+        for month in range(1, 13):
+            output_dict[str(year)][str(month)] = {}
+            output_dict[str(year)][str(month)]["name"] = calendar.month_name[month]
+            output_dict[str(year)][str(month)]["first_half"] = "01-15"
+
+            # Get digit for last day of the month
+            last_day = calendar.monthrange(year, month)[1]
+            output_dict[str(year)][str(month)]["second_half"] = "16-" + str(last_day)
+    return output_dict
 
 
 def update_values(spreadsheet_id, range_name, value_input_option, _values):
@@ -200,4 +211,4 @@ def get_creds():
 
 
 if __name__ == "__main__":
-    generate_template()
+    create_calendar_template()
